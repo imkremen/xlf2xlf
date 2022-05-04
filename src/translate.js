@@ -1,6 +1,7 @@
 const googleTranslate = require('@vitalets/google-translate-api');
 const chalk = require('chalk');
 const cloneDeep = require('lodash.clonedeep');
+const isEqual = require('lodash.isequal');
 const convert = require('xml-js');
 const Bottleneck = require('bottleneck/es5');
 
@@ -40,20 +41,46 @@ async function translate(input, from, to, minTime, maxConcurrent, skip) {
             const source = elem.elements.find(el => el.name === 'source');
 
             if (source) {
-                const target = cloneDeep(source);
-                target.name = 'target';
+                let target = elem.elements.find(el => el.name === 'target')
 
-                target.elements.forEach(el => {
+                if (target) {
+                    if (target.attributes?.state === "translated") {
+                        continue
+                    }
+
+                    if (!target.attributes?.state) {
+                        if (isEqual(source.elements, target.elements)) {
+                            target.attributes = { state: "new" }
+                        } else { 
+                            target.attributes = { state: "translated" }
+                            continue
+                        }
+                    }
+                } else {
+                    target = cloneDeep(source);
+                    target.name = 'target';
+                    target.attributes = {state: "new"}
+                    elem.elements.push(target);
+                }
+
+                   
+                const newTarget = cloneDeep(source);
+                newTarget.name = 'target';
+
+                newTarget.elements?.forEach(el => {
                     if (el.type === 'text' && !match(el.text)) {
                         if (skip) {
+                            newTarget.attributes = {state: "new"};
                             el.text = '[INFO] Add your translation here';
                         } else {
+                            newTarget.attributes = {state: "translated"};
                             targetsQueue.push(el);
                         }
                     }
                 });
 
-                elem.elements.push(target);
+                target.attributes = newTarget.attributes;
+                target.elements = newTarget.elements;
             }
 
             continue;

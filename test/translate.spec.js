@@ -63,7 +63,7 @@ describe('translate', () => {
                             </context-group>
                             <note priority="1" from="description">An introduction header for this sample</note>
                             <note priority="1" from="meaning">User welcome</note>
-                            <target>Hello_TRANSLATED i18n!_TRANSLATED</target>
+                            <target state="translated">Hello_TRANSLATED i18n!_TRANSLATED</target>
                         </trans-unit>
                     </body>
                 </file>

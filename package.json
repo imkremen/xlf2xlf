@@ -1,48 +1,49 @@
 {
-  "name": "xlf2xlf",
-  "version": "1.0.18",
-  "description": "A command-line utility to automatically translate .xlf translation files using Google Translate",
-  "main": "./src/index.js",
-  "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha",
-    "test:watch": "node ./node_modules/mocha/bin/mocha --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chekit/xlf2xlf.git"
-  },
-  "keywords": [
-    "translate",
-    "google",
-    "xlf",
-    "angular",
-    "i18n",
-    "multilingual",
-    "google-translate",
-    "angular2",
-    "ng"
-  ],
-  "author": "Anton Cherepov",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chekit/xlf2xlf/issues"
-  },
-  "homepage": "https://github.com/chekit/xlf2xlf#readme",
-  "preferGlobal": true,
-  "bin": {
-    "xlf2xlf": "./src/index.js"
-  },
-  "dependencies": {
+    "name": "xlf2xlf",
+    "version": "1.1.0",
+    "description": "A command-line utility to automatically translate .xlf translation files using Google Translate",
+    "main": "./src/index.js",
+    "scripts": {
+        "test": "node ./node_modules/mocha/bin/mocha",
+        "test:watch": "node ./node_modules/mocha/bin/mocha --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chekit/xlf2xlf.git"
+    },
+    "keywords": [
+        "translate",
+        "google",
+        "xlf",
+        "angular",
+        "i18n",
+        "multilingual",
+        "google-translate",
+        "angular2",
+        "ng"
+    ],
+    "author": "Anton Cherepov",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/chekit/xlf2xlf/issues"
+    },
+    "homepage": "https://github.com/chekit/xlf2xlf#readme",
+    "preferGlobal": true,
+    "bin": {
+        "xlf2xlf": "./src/index.js"
+    },
+    "dependencies": {
         "@vitalets/google-translate-api": "8.0.0",
-    "bottleneck": "2.19.5",
-    "chalk": "2.4.1",
-    "lodash.clonedeep": "4.5.0",
-    "xml-js": "1.6.11",
-    "yargs": "15.3.1"
-  },
-  "devDependencies": {
-    "chai": "4.1.2",
-    "mocha": "7.2.0",
-    "proxyquire": "2.0.1"
-  }
+        "bottleneck": "2.19.5",
+        "chalk": "2.4.1",
+        "lodash.clonedeep": "4.5.0",
+        "lodash.isequal": "4.5.0",
+        "xml-js": "1.6.11",
+        "yargs": "15.3.1"
+    },
+    "devDependencies": {
+        "chai": "4.1.2",
+        "mocha": "7.2.0",
+        "proxyquire": "2.0.1"
+    }
 }
