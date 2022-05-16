@@ -63,24 +63,19 @@ async function translate(input, from, to, minTime, maxConcurrent, skip) {
                     elem.elements.push(target);
                 }
 
-                   
-                const newTarget = cloneDeep(source);
-                newTarget.name = 'target';
-
-                newTarget.elements?.forEach(el => {
+                target.elements?.forEach(el => {
                     if (el.type === 'text' && !match(el.text)) {
                         if (skip) {
-                            newTarget.attributes = {state: "new"};
+                            target.attributes = {state: "new"};
                             el.text = '[INFO] Add your translation here';
                         } else {
-                            newTarget.attributes = {state: "translated"};
+                            target.attributes = {state: "translated"};
                             targetsQueue.push(el);
                         }
+                    } else if (el.type === 'text' && match(el.text)) {
+                        target.attributes = {state: "translated"};
                     }
                 });
-
-                target.attributes = newTarget.attributes;
-                target.elements = newTarget.elements;
             }
 
             continue;
@@ -98,7 +93,7 @@ async function translate(input, from, to, minTime, maxConcurrent, skip) {
     await Promise.all(allPromises);
 
     return convert.js2xml(xlfStruct, {
-        spaces: 4,
+        spaces: 2,
         // https://github.com/nashwaan/xml-js/issues/26#issuecomment-355620249
         attributeValueFn: function (value) {
             return value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
